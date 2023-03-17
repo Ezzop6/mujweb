@@ -11,7 +11,7 @@ from bl_pages.pojistenci_app_pages import pojistenci_app_pages
 from bl_pages.smenost_app_pages import smenost_app_pages
 from database import DbUsersMain
 
-
+from flask_session import Session
 from flask_wtf.csrf import CSRFProtect, CSRFError
 from flask import Flask, render_template, redirect, url_for, g, session
 from flask_login import current_user, LoginManager, UserMixin, login_user, logout_user
@@ -23,10 +23,13 @@ login_manager = LoginManager()
 
 app = Flask(__name__)
 csrf = CSRFProtect(app)
+
 app.config['PERMANENT_SESSION_LIFETIME'] = 7200 # time to logout user
 app.config['WTF_CSRF_TIME_LIMIT'] = 3600
-app.config['SECRET_KEY'] = random_secret_key()
+app.config['SESSION_TYPE'] = 'filesystem'
+app.config['SECRET_KEY'] = os.environ.get('APP_SECRET_KEY')
 
+Session(app)
 
 login_manager.init_app(app)
 
