@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %} Registrace {% endblock %}
+
+{% block content %}
+
+<form method="POST">
+    {{ form_register.csrf_token() }}
+
+    <div class="input-group">
+        {{ form_register.login(class='input', required='required', autocomplete='off') }}
+        <label class="user-label">{{ form_register.login.label }}</label>
+    </div>
+    <div class="input-group">
+        {{ form_register.password(class='input', required='required', autocomplete='off') }}
+        <label class="user-label">{{ form_register.password.label }}</label>
+    </div>
+    <div class="input-group">
+        {{ form_register.password2(class='input', required='required', autocomplete='off') }}
+        <label class="user-label">{{ form_register.password2.label }}</label>
+    </div>
+    <button data-text="Awesome" class="button" type="submit" name="Register">
+        <span class="actual-text">&nbsp;Registrovat&nbsp;</span>
+        <span class="hover-text" aria-hidden="true">&nbsp;Registrovat&nbsp;</span>
+    </button>
+</form>
+
+{% for field, errors in form_register.errors.items() %}
+<div class="alert alert-error">
+    {{ form_register[field].label }}: {{ ', '.join(errors) }}
+</div>
+{% endfor %}
+{% endblock %}

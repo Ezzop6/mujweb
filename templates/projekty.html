@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %} Projekty {% endblock %}
+
+{% block content %}
+    <a href="{{url_for( 'pojistenci_app_pages.main_page' ) }}">pojistenci</a>
+    <a href="{{url_for( 'smenost_app_pages.main_page' ) }}">Smenost</a>
+
+{% endblock %}

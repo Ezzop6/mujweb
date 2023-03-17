@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hlavni strana">
+    <link rel="stylesheet" href="{{ url_for( 'static', filename='../static/css/normalise.css' ) }}">
+    <link rel="stylesheet" href="{{ url_for( 'static', filename='../static/css/smenost_app.css' ) }}">
+    <link rel="icon" type="image/png" href="{{ url_for( 'static', filename='../static/img/logo.png' ) }}">
+    <title>{% block title %} Base html smennost app {% endblock %}</title>
+</head>
+<body>
+
+    <header>
+        {% block header %}
+        kalendar smen
+            {% if current_user.is_authenticated %}
+                        <p><a href="{{ url_for( 'logout_test_user' ) }}">Logout</a></p>
+                        {{ current_user.id }}
+            {% else %}
+                        <p><a href="{{ url_for( 'main_pages.main_page' ) }}">hlavni strana</a></p>
+                        <p><a href="{{ url_for( 'main_pages.login' ) }}">Login</a></p>
+            {% endif %}
+
+        {% endblock %}
+    </header>
+
+    <section>
+        {% block content %}
+        {% endblock %}
+    </section>
+
+
+    <footer>
+        {% block footer %}
+        <div class="footer">
+            <p>© 2023</p>
+        </div>
+        {% endblock %}
+    </footer>
+
+</body>
+</html>
+

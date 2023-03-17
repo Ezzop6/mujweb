@@ -1,0 +1,60 @@
+
+*{
+    /* outline: 1px solid red; */
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --color-background: #000;
+    --color-text: #ffffffcf;
+    --color-error: rgb(37, 35, 35);
+    --color-error-shadow: rgb(81, 80, 77);
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&family=Roboto:wght@100;300&display=swap");
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: var(--color-background)
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+}
+
+h1 {
+    font-size: 20rem;
+    font-weight: 800;
+    color: var(--color-error);
+    margin-bottom: 1rem;
+    text-shadow: 1rem 1rem 3rem var(--color-error-shadow);
+}
+
+p {
+    color: var(--color-text);
+}
+.error {
+    color: var(--color-error);
+}
+
+.joke {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+}
+
+.btn {
+    margin-top: 2rem;
+    font-size: 2rem;
+}

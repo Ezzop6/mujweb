@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hlavni strana">
+    <link rel="stylesheet" href="{{ url_for( 'static', filename='../static/css/normalise.css' ) }}">
+    <link rel="stylesheet" href="{{ url_for( 'static', filename='../static/css/main_page_style.css' ) }}">
+    <link rel="icon" type="image/png" href="{{ url_for( 'static', filename='../static/img/logo.png' ) }}">
+    <title>{% block title %} Base html {% endblock %}</title>
+</head>
+<body>
+
+    <header>
+        {% block header %}
+        <div>
+            <p> {{ current_user.is_authenticated }} </p>
+            <br>
+            <p> {{ current_user }} </p>
+            <br>
+            <p> {{ current_user.id }} </p>
+            <br>
+            <p> {{ session }} </p>
+            <br>
+            <p> {{ g.user  }} </p>
+            <br>
+            <p> {{ csrf_token }} </p>
+            <br>
+
+            
+
+        </div>
+        <div>
+            <a href="{{ url_for( 'main_pages.main_page' ) }}">
+                <img src="#" alt="logo">
+            </a>
+        </div>
+        <div class="navbar">
+            <ul>
+                <li><a href="{{ url_for( 'main_pages.projekty' ) }}">
+                        <div class="buttons">
+                            <button class="btn"><span></span>
+                                <p data-start="good luck!" data-text="Na tomhle jsem pracoval" data-title="Projekty"></p>
+                            </button>
+                        </div>
+                    </a>
+                </li>
+                <li><a href="#">
+                    <div class="buttons">
+                        <button class="btn"><span></span>
+                            <p data-start="good luck!" data-text="Info" data-title="O mně"></p>
+                        </button>
+                    </div>
+                </a>
+                </li>
+                <li><a href="mailto:ezzop6@gmail.com">
+                    <div class="buttons">
+                        <button class="btn"><span></span>
+                            <p data-start="good luck!" data-text="Sorry jen email" data-title="Kontakt"></p>
+                        </button>
+                    </div>
+                </a>
+                </li>
+            {% if not current_user.is_authenticated %}
+                <li><a href="{{ url_for( 'main_pages.register' ) }}">
+                    <div class="buttons">
+                        <button class="btn"><span></span>
+                            <p data-start="good luck!" data-text="Tady se mužete zaregistrovat" data-title="Registrovat"></p>
+                        </button>
+                    </div>
+                </a>
+                </li>
+                <li><a href="{{ url_for( 'main_pages.login' ) }}">
+                    <div class="buttons">
+                        <button class="btn"><span></span>
+                            <p data-start="good luck!" data-text="Snad si pomatujete heslo" data-title="Přihlásit"></p>
+                        </button>
+                    </div>
+                </a>
+                </li>
+            {% endif %}
+            {% if current_user.is_authenticated %}
+            <li><a href="{{ url_for( 'main_pages.logout' ) }}">
+                <div class="buttons">
+                    <button class="btn"><span></span>
+                        <p data-start="good luck!" data-text="Z5 do reality" data-title="Odhlásit"></p>
+                    </button>
+                </div>
+            </a>
+            </li>
+            <P> {{ current_user.id }} </P>
+
+            {% endif %}
+            </ul>
+            
+
+            <div class="debug">
+                {% if debug == True %}
+                <p>Debug mode</p>
+                {% if not current_user.is_authenticated %}
+                    <p><a href="{{ url_for( 'login_test_user' ) }}">Login</a></p>
+                {% endif %}
+                
+                {% if current_user.is_authenticated %}
+                    <p><a href="{{ url_for( 'logout_test_user' ) }}">Logout</a></p>
+                    {{ current_user.id }}
+                {% endif %}
+                <p>prihlasen {{ current_user.is_authenticated }} </p>
+            {% endif %}
+            </div>
+        </div>
+        {% endblock %}
+    </header>
+
+    <section>
+        {% block content %}
+        {% endblock %}
+    </section>
+
+
+    <footer>
+        {% block footer %}
+        <div class="footer">
+            <p></p>
+        </div>
+        {% endblock %}
+    </footer>
+
+</body>
+</html>
+

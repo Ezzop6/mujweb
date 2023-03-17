@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vlastni error stranka 403">
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/normalise.css') }}">
+    <link rel="stylesheet" href="{{ url_for( 'static', filename='../static/css/style.css' ) }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/css/error.css') }}">
+    <title>Neautorizovaný přístup</title>
+</head>
+<body>
+    <div class="container">
+        <h1>403</h1>
+        <p class="joke">{{message}}</p>
+        <p class="error">{{error}}</p>
+        <a class="btn" href="/">Home</a>
+    </div>
+</body>
+</html>

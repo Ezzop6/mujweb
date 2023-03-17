@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+
+<form method="POST">
+    {{ form_login.csrf_token() }}
+    
+    <div class="input-group">
+        {{ form_login.login(class='input', required='required', autocomplete='off') }}
+        <label class="user-label">{{ form_login.login.label }}</label>
+    </div>
+    <div class="input-group">
+        {{ form_login.password(class='input', required='required', autocomplete='off') }}
+        <label class="user-label">{{ form_login.password.label }}</label>
+    </div>
+    <button data-text="Awesome" class="button" type="submit" name="Login">
+        <span class="actual-text">&nbsp;Přihlásit&nbsp;</span>
+        <span class="hover-text" aria-hidden="true">&nbsp;Přihlásit&nbsp;</span>
+    </button>
+</form>
+
+{% for field, errors in form_login.errors.items() %}
+<div class="alert alert-error">
+    {{ form_login[field].label }}: {{ ', '.join(errors) }}
+</div>
+{% endfor %}
+{% endblock %}
