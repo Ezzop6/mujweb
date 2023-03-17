@@ -4,7 +4,6 @@ from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 debug = os.environ.get("DEBUG") == "True"
 
-user_for_debuging = os.environ.get("USER_FOR_DEBUGING")
 from my_packages._tools import *
 from my_packages.vtipky import error_page_joke
 from bl_pages.main_pages import main_pages
@@ -38,9 +37,9 @@ app.register_blueprint(smenost_app_pages, url_prefix='/KalendarSmen_app')
 
 @app.before_request
 def before_request():
-    g.user = None
-    if "user" in session:
-        g.user = session["user"]
+    if "user" in session: g.user = session["user"]
+
+        
         
 @login_manager.user_loader
 def load_user(user_id):
