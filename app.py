@@ -13,34 +13,21 @@ from bl_pages.smenost_app_pages import smenost_app_pages
 from database import DbUsersMain
 
 
-from flask_session import Session
+
 from flask import Flask, render_template, redirect, url_for, g, session
 from flask_login import current_user, LoginManager, UserMixin, login_user, logout_user
-from flask_wtf.csrf import CSRFProtect
-from redis import Redis
 import os
 
 db = DbUsersMain()
 login_manager = LoginManager()
 
-# nastaveni redisu
-redis_password = os.environ.get("REDIS_PWD")
-redis_host = os.environ.get("REDIS_HOST")
-redis_port = os.environ.get("REDIS_PORT")
-redis_client = Redis( host = redis_host, port = redis_port, password = redis_password )
 
 app = Flask(__name__)
-app.config['SESSION_TYPE'] = 'redis'
-csrf = CSRFProtect(app)
 
 app.config['PERMANENT_SESSION_LIFETIME'] = 7200 # time to logout user
 app.config['WTF_CSRF_TIME_LIMIT'] = 3600
-app.config['SESSION_TYPE'] = 'redis'
-app.config['SESSION_REDIS'] = redis_client
-app.config['SESSION_USE_SIGNER'] = True
 app.config['SECRET_KEY'] = random_secret_key()
 
-Session(app)
 
 login_manager.init_app(app)
 

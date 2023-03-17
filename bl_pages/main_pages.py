@@ -36,7 +36,6 @@ def login():
             current_user = User(user_id)
             login_user(current_user)
             # Ulož CSRF token do relace
-            session['csrf_token'] = form_login.csrf_token.data
             return render_template('index.html')
     return render_template('Login.html', form_login=form_login)
 
@@ -48,7 +47,6 @@ def register():
             user_id = db.get_user_id(form_register.login.data)
             current_user = User(user_id)
             login_user(current_user)
-            session['csrf_token'] = form_register.csrf_token.data
             return render_template('index.html')
     return render_template('Register.html', form_register=form_register)
 
