@@ -13,7 +13,7 @@ from bl_pages.smenost_app_pages import smenost_app_pages
 from database import DbUsersMain
 
 
-
+from flask_wtf.csrf import CSRFProtect, CSRFError
 from flask import Flask, render_template, redirect, url_for, g, session
 from flask_login import current_user, LoginManager, UserMixin, login_user, logout_user
 import os
@@ -23,7 +23,7 @@ login_manager = LoginManager()
 
 
 app = Flask(__name__)
-
+csrf = CSRFProtect(app)
 app.config['PERMANENT_SESSION_LIFETIME'] = 7200 # time to logout user
 app.config['WTF_CSRF_TIME_LIMIT'] = 3600
 app.config['SECRET_KEY'] = random_secret_key()
@@ -61,7 +61,11 @@ def access_denied(error):
         return render_template('403.html', error=error, message=message)
     elif error_code == '404':
         return render_template('404.html', error=error, message=message)
-    
+
+@app.errorhandler(CSRFError)
+def handle_csrf_error(e):
+    return e.description
+
 # for debuging
 if debug:
     @app.route('/login_test_user')
